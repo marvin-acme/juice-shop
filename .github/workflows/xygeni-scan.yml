@@ -27,4 +27,3 @@ jobs:
           xygeni_url: https://api.xygeni.io
           token: ${{ secrets.XYGENI_TOKEN }}
           gh_token: ${{ secrets.PAT_FOR_XYGENI_SCAN }}
-          command: scan --audit-project
