@@ -1,7 +1,7 @@
 <!--
   ~ Copyright (c) 2014-2025 Bjoern Kimminich & the OWASP Juice Shop contributors.
   ~ SPDX-License-Identifier: MIT
-  -->
+-->
 
 <mat-card appearance="outlined" class="mat-elevation-z6">
   <div class="mdc-card">
@@ -20,7 +20,7 @@
     </p>
     <mat-form-field appearance="outline" color="accent">
       <mat-label>{{'LABEL_AMOUNT' | translate}}</mat-label>
-      <input [formControl]="balanceControl" type="number" matInput aria-label="Enter an amount">
+      <input [formControl]="balanceControl" type="number" matInput aria-label="Enter an amount" min="1" max="10000" required>
       <mat-error *ngIf="balanceControl.invalid && balanceControl.errors.required">
         {{"MANDATORY_AMOUNT"| translate}}
       </mat-error>
