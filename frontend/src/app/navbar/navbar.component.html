@@ -1,7 +1,7 @@
 <!--
   ~ Copyright (c) 2014-2025 Bjoern Kimminich & the OWASP Juice Shop contributors.
   ~ SPDX-License-Identifier: MIT
-  -->
+-->
 
 <mat-toolbar class="mat-elevation-z6" color="primary" fxLayout="column" xmlns="http://www.w3.org/1999/html">
 
@@ -114,7 +114,8 @@
         <mat-form-field class="language-search-field">
           <mat-icon matPrefix class="search-icon">search</mat-icon>
           <mat-label>{{ 'SEARCH' | translate }}</mat-label>
-          <input type="search" matInput [(ngModel)]="languageSearchQuery" (input)="filterLanguages()">
+          <input type="search" matInput [(ngModel)]="languageSearchQuery" (input)="filterLanguages()" 
+                 pattern="[A-Za-z0-9\s]+" maxlength="50" required>
         </mat-form-field>
       </div>
       @for (language of filteredLanguages; track language.key) {
