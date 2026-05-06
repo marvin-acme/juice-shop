@@ -1,7 +1,7 @@
 <!--
   ~ Copyright (c) 2014-2025 Bjoern Kimminich & the OWASP Juice Shop contributors.
   ~ SPDX-License-Identifier: MIT
-  -->
+-->
 
 <div fxLayoutAlign="center">
   <mat-card appearance="outlined" class="mat-elevation-z6">
@@ -27,7 +27,8 @@
                     <mat-label translate>LABEL_MESSAGE</mat-label>
                     <input id="message-input" #message name="message" [formControl]="messageControl"
                             matInput placeholder="{{ 'ASK_ME_ANYTHING_PLACEHOLDER' | translate}}"
-                            aria-label="Text field for a chat message" (keyup.enter)="sendMessage()">
+                            aria-label="Text field for a chat message" (keyup.enter)="sendMessage()"
+                            maxlength="500" pattern=".*\S.*" required>
                   </mat-form-field>
                 </div>
               </div>
