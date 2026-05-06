@@ -1,3 +1,6 @@
+To fix the vulnerability related to the use of a weak hash algorithm (MD5) in the provided code, we can replace MD5 with a stronger algorithm like SHA-256. Here's the updated code:
+
+```javascript
 /*
  * Copyright (c) 2014-2025 Bjoern Kimminich & the OWASP Juice Shop contributors.
  * SPDX-License-Identifier: MIT
@@ -69,17 +72,17 @@ module.exports = function (grunt) {
     }
   })
 
-  grunt.registerTask('checksum', 'Create .md5 checksum files', function () {
+  grunt.registerTask('checksum', 'Create .sha256 checksum files', function () {
     const fs = require('node:fs')
     const crypto = require('node:crypto')
     fs.readdirSync('dist/').forEach(file => {
       const buffer = fs.readFileSync('dist/' + file)
-      const md5 = crypto.createHash('md5')
-      md5.update(buffer)
-      const md5Hash = md5.digest('hex')
-      const md5FileName = 'dist/' + file + '.md5'
-      grunt.file.write(md5FileName, md5Hash)
-      grunt.log.write(`Checksum ${md5Hash} written to file ${md5FileName}.`).verbose.write('...').ok()
+      const sha256 = crypto.createHash('sha256')
+      sha256.update(buffer)
+      const sha256Hash = sha256.digest('hex')
+      const sha256FileName = 'dist/' + file + '.sha256'
+      grunt.file.write(sha256FileName, sha256Hash)
+      grunt.log.write(`Checksum ${sha256Hash} written to file ${sha256FileName}.`).verbose.write('...').ok()
       grunt.log.writeln()
     })
   })
