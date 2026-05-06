@@ -1,7 +1,7 @@
 <!--
   ~ Copyright (c) 2014-2025 Bjoern Kimminich & the OWASP Juice Shop contributors.
   ~ SPDX-License-Identifier: MIT
-  -->
+-->
 
 <mat-card appearance="outlined" class="mat-own-card mat-elevation-z6">
   <div class="mdc-card">
@@ -47,7 +47,8 @@
         <mat-hint
             [innerHtml]="'FOLLOW_FOR_MONTHLY_COUPONS' | translate:{blueSky: blueSkyUrl, reddit: redditUrl}">
         </mat-hint>
-        <input #coupon id="coupon" [formControl]="couponControl" matInput type="text" placeholder="{{ 'ENTER_COUPON_CODE' | translate}}">
+        <input #coupon id="coupon" [formControl]="couponControl" matInput type="text" placeholder="{{ 'ENTER_COUPON_CODE' | translate}}"
+               maxlength="10" pattern="[A-Za-z0-9]+" required>
         <mat-hint align="end">{{coupon .value?.length || 0}}/10</mat-hint>
         <mat-error *ngIf="couponControl.invalid && (couponControl.errors.minlength || couponControl.errors.maxlength)">
           {{'COUPON_CODE_HINT' | translate}}
