@@ -156,7 +156,7 @@ export class SearchResultComponent implements OnDestroy, AfterViewInit {
         this.io.socket().emit('verifyLocalXssChallenge', queryParam)
       }) // vuln-code-snippet hide-end
       this.dataSource.filter = queryParam.toLowerCase()
-      this.searchValue = this.sanitizer.bypassSecurityTrustHtml(queryParam) // vuln-code-snippet vuln-line localXssChallenge xssBonusChallenge
+      this.searchValue = this.sanitizeInput(queryParam) // Fix applied here
       this.gridDataSource.subscribe((result: any) => {
         if (result.length === 0) {
           this.emptyState = true
@@ -171,6 +171,12 @@ export class SearchResultComponent implements OnDestroy, AfterViewInit {
     }
   }
   // vuln-code-snippet end localXssChallenge xssBonusChallenge
+
+  sanitizeInput(input: string): SafeHtml {
+    const div = document.createElement('div');
+    div.textContent = input;
+    return div.innerHTML;
+  }
 
   startHackingInstructor (challengeName: string) {
     console.log(`Starting instructions for challenge "${challengeName}"`)
