@@ -197,8 +197,8 @@ export class PaymentComponent implements OnInit {
       })
     } else if (this.mode === 'deluxe') {
       this.userService.upgradeToDeluxe(this.paymentMode, this.paymentId).subscribe((data) => {
-        localStorage.setItem('token', data.token)
-        this.cookieService.put('token', data.token)
+        // Store token in a secure cookie instead of localStorage
+        this.cookieService.put('token', data.token, { httpOnly: true, secure: true, sameSite: 'Strict' })
         this.ngZone.run(async () => await this.router.navigate(['/deluxe-membership']))
       }, (err) => { console.log(err) })
     } else {
