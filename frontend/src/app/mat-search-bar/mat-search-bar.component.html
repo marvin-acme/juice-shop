@@ -1,9 +1,8 @@
 <mat-form-field class="mat-search_field" [@slideInOut]="searchVisible">
     <input #input matInput type="text" [(ngModel)]="value" [placeholder]="placeholder" [disabled]="isDisabled" (ngModelChange)="updateChanges()"
         (blur)="onBlurring(input.value)" (keyup.enter)="onEnterring(input.value)" (focus)="onFocussing(input.value)"
-        autocapitalize="none" />
+        autocapitalize="none" maxlength="100" pattern="[A-Za-z0-9\s]+" required />
 </mat-form-field>
-
 
 <span class="mat-search_icons" [class.mat-search_icons--active]="searchVisible">
     <mat-icon class="mat-search_icon-close" (click)="close()" matRipple>
