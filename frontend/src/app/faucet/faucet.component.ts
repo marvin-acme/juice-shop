@@ -200,7 +200,7 @@ export class FaucetComponent {
       console.log('session', this.session)
       this.changeDetectorRef.detectChanges()
     } catch (err) {
-      console.log(err)
+      console.error('An error occurred during authentication. Please try again later.')
     }
   }
 
@@ -236,7 +236,7 @@ export class FaucetComponent {
       this.fetchMyBeeBalance()
     } catch (error) {
       console.error('Error extracting BEEs:', error.message)
-      this.errorMessage = error.message
+      this.errorMessage = 'An error occurred while extracting BEE tokens. Please try again later.'
     }
   }
 
