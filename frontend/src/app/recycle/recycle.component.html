@@ -1,7 +1,7 @@
 <!--
   ~ Copyright (c) 2014-2025 Bjoern Kimminich & the OWASP Juice Shop contributors.
   ~ SPDX-License-Identifier: MIT
-  -->
+-->
 
 <mat-card class="mat-elevation-z6 mat-own-card" fxLayout="row"  fxLayout.lt-md="column"
           fxLayoutGap.lt-md="20px">
@@ -12,13 +12,14 @@
       <div class="form-container" id="recycle-form">
         <mat-form-field appearance="outline" color="accent">
           <mat-label>{{"LABEL_REQUESTOR" | translate}}</mat-label>
-          <input [formControl]="requestorControl" type="text" matInput>
+          <input [formControl]="requestorControl" type="text" matInput
+                 maxlength="50" pattern="[A-Za-z\s]+" required>
         </mat-form-field>
 
         <mat-form-field appearance="outline" color="accent">
           <mat-label>{{"LABEL_QUANTITY" | translate}}</mat-label>
           <input [formControl]="recycleQuantityControl" type="number" [placeholder]="'IN_LITERS_PLACEHOLDER' | translate"
-                 matInput>
+                 matInput min="10" max="1000" required>
           <mat-error *ngIf="recycleQuantityControl.invalid && recycleQuantityControl.errors.required" translate>
             {{"MANDATORY_QUANTITY" | translate}}
           </mat-error>
@@ -27,12 +28,12 @@
           </mat-error>
         </mat-form-field>
 
-        <app-address (emitSelection)="getMessage($event)" [addNewAddressDiv]="false" #addressComp
-                    class="mat-elevation-z0"></app-address>
+      <app-address (emitSelection)="getMessage($event)" [addNewAddressDiv]="false" #addressComp
+                  class="mat-elevation-z0"></app-address>
 
       <mat-form-field *ngIf="pickup.value && recycleQuantityControl.value > 100" appearance="outline">
         <mat-label>{{"LABEL_PICKUP_DATE" | translate}}</mat-label>
-        <input [formControl]="pickUpDateControl" matInput [matDatepicker]="picker">
+        <input [formControl]="pickUpDateControl" matInput [matDatepicker]="picker" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="pickUpDateControl.invalid">{{"INVALID_DATE" | translate }}</mat-error>
