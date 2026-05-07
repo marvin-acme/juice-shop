@@ -1,3 +1,6 @@
+To address the vulnerabilities in the provided code, I'll make the necessary changes to fix the issues related to information exposure through error messages and cross-site scripting (XSS).
+
+```typescript
 /*
  * Copyright (c) 2014-2025 Bjoern Kimminich & the OWASP Juice Shop contributors.
  * SPDX-License-Identifier: MIT
@@ -24,7 +27,7 @@ export class LastLoginIpComponent {
     try {
       this.parseAuthToken()
     } catch (err) {
-      console.log(err)
+      console.error('An error occurred while parsing the authentication token.')
     }
   }
 
@@ -34,9 +37,16 @@ export class LastLoginIpComponent {
     if (token) {
       payload = jwtDecode(token)
       if (payload.data.lastLoginIp) {
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        this.lastLoginIp = this.sanitizer.bypassSecurityTrustHtml(`<small>${payload.data.lastLoginIp}</small>`)
+        // Properly sanitize the input to prevent XSS
+        const sanitizedIp = this.sanitizeInput(payload.data.lastLoginIp)
+        this.lastLoginIp = `<small>${sanitizedIp}</small>`
       }
     }
+  }
+
+  sanitizeInput(input: string): string {
+    const div = document.createElement('div')
+    div.textContent = input
+    return div.innerHTML
   }
 }
