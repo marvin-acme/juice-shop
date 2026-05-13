@@ -35,7 +35,12 @@ export class UserService {
   }
 
   save (params: any) {
-    return this.http.post(this.host + '/', params).pipe(
+    const allowedHosts = ['example.com']; // Whitelist of allowed hosts
+    const url = new URL(this.host + '/');
+    if (!allowedHosts.includes(url.hostname)) {
+      throw new Error('Host not allowed');
+    }
+    return this.http.post(url.toString(), params).pipe(
       map((response: any) => response.data),
       catchError((err) => { throw err })
     )
@@ -43,7 +48,12 @@ export class UserService {
 
   login (params: any) {
     this.isLoggedIn.next(true)
-    return this.http.post(this.hostServer + '/rest/user/login', params).pipe(map((response: any) => response.authentication), catchError((err) => { throw err }))
+    const allowedHosts = ['example.com']; // Whitelist of allowed hosts
+    const url = new URL(this.hostServer + '/rest/user/login');
+    if (!allowedHosts.includes(url.hostname)) {
+      throw new Error('Host not allowed');
+    }
+    return this.http.post(url.toString(), params).pipe(map((response: any) => response.authentication), catchError((err) => { throw err }))
   }
 
   getLoggedInState () {
