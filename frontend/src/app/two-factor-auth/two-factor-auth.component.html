@@ -1,7 +1,7 @@
 <!--
   ~ Copyright (c) 2014-2025 Bjoern Kimminich & the OWASP Juice Shop contributors.
   ~ SPDX-License-Identifier: MIT
-  -->
+-->
 
 <div fxLayoutAlign="center">
   <mat-card appearance="outlined" class="mat-elevation-z6">
@@ -28,7 +28,8 @@
             <input id="currentPasswordDisable" formControlName="passwordControl" type="password" matInput
                   aria-label="Field to enter the current password"
                   placeholder="{{'MANDATORY_CURRENT_PASSWORD' | translate }}"
-                  autocomplete="off">
+                  autocomplete="off"
+                  required>
           </mat-form-field>
 
           <button
@@ -70,7 +71,8 @@
           <input id="currentPasswordSetup" formControlName="passwordControl" type="password" matInput
                 aria-label="Field to enter the current password"
                 placeholder="{{'MANDATORY_CURRENT_PASSWORD' | translate }}"
-                autocomplete="off">
+                autocomplete="off"
+                required>
         </mat-form-field>
 
         <mat-form-field appearance="outline" color="accent">
@@ -85,7 +87,7 @@
             aria-label="Field to enter the initial token. This must have 6 digits."
             placeholder="{{'INITIAL_CODE_PLACEHOLDER' | translate }}"
             minlength="6" maxlength="6" pattern="^[\d]{6}$"
-          >
+            required>
           <mat-error translate>INVALID_TWO_FACTOR_AUTH_TOKEN</mat-error>
           <mat-icon matSuffix matTooltip="{{ 'INITIAL_TOKEN_TOOLTIP' | translate}}"
                     matTooltipPosition=right
