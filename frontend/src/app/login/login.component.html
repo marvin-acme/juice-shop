@@ -1,7 +1,7 @@
 <!--
   ~ Copyright (c) 2014-2025 Bjoern Kimminich & the OWASP Juice Shop contributors.
   ~ SPDX-License-Identifier: MIT
-  -->
+-->
 
 <div fxLayoutAlign="center">
   <mat-card appearance="outlined" class="mat-elevation-z6">
@@ -19,7 +19,10 @@
                 [formControl]="emailControl"
                 (focus)="this.error=null"
                 matInput placeholder=""
-                aria-label="Text field for the login email">
+                aria-label="Text field for the login email"
+                type="email"
+                maxlength="254"
+                required>
           <mat-error *ngIf="emailControl.invalid" translate>MANDATORY_EMAIL</mat-error>
         </mat-form-field>
 
@@ -28,8 +31,12 @@
           <input id="password" #password name="password"
                 [formControl]="passwordControl"
                 (focus)="this.error=null"
-                matInput placeholder="" [type]="hide ? 'password' : 'text'"
-                aria-label="Text field for the login password">
+                matInput placeholder=""
+                type="password"
+                aria-label="Text field for the login password"
+                autocomplete="current-password"
+                minlength="12"
+                required>
           <button *ngIf="hide" mat-icon-button matSuffix (click)="hide = !hide"
                   aria-label="Button to display the password" matTooltip="{{ 'SHOW_PWD_TOOLTIP' | translate  }}"
                   matTooltipPosition=right>
