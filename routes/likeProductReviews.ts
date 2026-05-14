@@ -10,12 +10,13 @@ import { challenges } from '../data/datacache'
 import * as security from '../lib/insecurity'
 import { type Review } from '../data/types'
 import * as db from '../data/mongodb'
+import sanitize from 'mongo-sanitize'
 
 const sleep = async (ms: number) => await new Promise(resolve => setTimeout(resolve, ms))
 
 export function likeProductReviews () {
   return async (req: Request, res: Response, next: NextFunction) => {
-    const id = req.body.id
+    const id = sanitize(req.body.id)
     const user = security.authenticatedUsers.from(req)
     if (!user) {
       return res.status(401).json({ error: 'Unauthorized' })
