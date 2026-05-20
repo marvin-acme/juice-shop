@@ -6,7 +6,7 @@ on:
   # no push triggers
   # no pull request triggers
   schedule:
-    - cron: '00 00 * * *'
+    - cron: '00 23 * * *'
 
 permissions:
   contents: write
@@ -31,7 +31,7 @@ jobs:
         uses: xygeni/xygeni-action@13c6ed2797df7d85749864e2cbcf09c893f43b23
         id: Xygeni-Scanner
         with:
-          command: scan --run=deps,sast --auto-remediate --no-upload --format none
+          command: scan --run=deps --auto-remediate --no-upload --format none
           xygeni_url: https://api.xygeni.io
           token: ${{ secrets.XYGENI_TOKEN }}
           # run PR from actions should be enabled
